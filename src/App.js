@@ -1,8 +1,9 @@
-import React from 'react';
+import NewMessageForm from './components/NewMessageForm';
 
 function App() {
   return (
     <div>
+      <NewMessageForm />
     </div>
   );
 }
