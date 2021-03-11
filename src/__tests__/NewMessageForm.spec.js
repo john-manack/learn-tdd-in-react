@@ -5,10 +5,12 @@ import NewMessageForm from '../components/NewMessageForm';
 
 describe('<NewMessageForm />', () => {
     let getByTestId;
+    let sendHandler;
 
     describe('clicking the send button', () => {
         beforeEach(async () => {
-            ({ getByTestId } = render(<NewMessageForm />));
+            sendHandler = jest.fn().mockName('sendHandler');
+            ({ getByTestId } = render(<NewMessageForm onSend={sendHandler}/>));
 
         await userEvent.type(
             getByTestId('messageText'),
@@ -20,5 +22,9 @@ describe('<NewMessageForm />', () => {
         it('clears the text field', () => {
             expect(getByTestId('messageText').value).toEqual('');
         });
+
+        it('calls the send handler', () => {
+            expect(sendHandler).toHaveBeenCalledWith('New message');
+        })
     });
 });
